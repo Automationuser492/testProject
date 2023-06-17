@@ -2,6 +2,8 @@ package test_automation.test_automation;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -15,30 +17,66 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
 
-public class Mytest {
-	WebDriver driver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
+import org.testng.annotations.BeforeClass;
+
+
+
+public class Mytest {
+	private WebDriver driver;
+	DesiredCapabilities desc;
+	
+	@BeforeClass
+	
+	
+	public void test1() throws MalformedURLException {
+		WebDriverManager.chromedriver().setup();
+		
+		desc = DesiredCapabilities.chrome();
+		
+		driver = new RemoteWebDriver(new URL("http://192.168.29.82:4444/wd/hub"), desc);
+		driver.manage().window().maximize();
+		driver.get("https://auth.dev.vntech.io");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		// Handling Cookie
+		  
+		  List<WebElement> cookiePopups = driver.findElements(By.xpath("//div[@class='MuiGrid-root MuiGrid-container css-3uuuu9']"));
+		  if (!cookiePopups.isEmpty()) {
+		  // Cookie pop-up is present, handle it
+		  WebElement acceptButton = driver.findElement(By.xpath("(//button[@type='button'])[5]"));
+		  acceptButton.click();
+		  }
+			
+				
+	}
+	
   @Test
-  public void openurl() throws IOException, InterruptedException {
-//Opening URL
+  public void main(String[] args) throws IOException, InterruptedException {
 	  
-	  System.setProperty("webdriver.chrome.driver", "C:\\\\chromedriver_win32\\\\chromedriver.exe");
-	  driver=new ChromeDriver();
-	  driver.manage().window().maximize();
-	  driver.get("https://auth.dev.vntech.io");
-	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+//
+//	  
+////	  System.setProperty("webdriver.chrome.driver", "C:\\\\chromedriver_win32\\\\chromedriver.exe");
+////	  driver=new ChromeDriver();
+//	  driver.manage().window().maximize();
+//	  driver.get("https://auth.dev.vntech.io");
+//	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 // Handling Cookie
-	  
-	  List<WebElement> cookiePopups = driver.findElements(By.xpath("//div[@class='MuiGrid-root MuiGrid-container css-3uuuu9']"));
-	  if (!cookiePopups.isEmpty()) {
-	  // Cookie pop-up is present, handle it
-	  WebElement acceptButton = driver.findElement(By.xpath("(//button[@type='button'])[5]"));
-	  acceptButton.click();
-	  }
-	  
+//	  
+//	  List<WebElement> cookiePopups = driver.findElements(By.xpath("//div[@class='MuiGrid-root MuiGrid-container css-3uuuu9']"));
+//	  if (!cookiePopups.isEmpty()) {
+//	  // Cookie pop-up is present, handle it
+//	  WebElement acceptButton = driver.findElement(By.xpath("(//button[@type='button'])[5]"));
+//	  acceptButton.click();
+//	  }
+//	  
 //Signup With Email
 //		driver.findElement(By.xpath("//a[text()='Sign up']")).click();
 //		Thread.sleep(5000);
