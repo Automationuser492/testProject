@@ -25,8 +25,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.testng.annotations.BeforeClass;
 
-
-
 public class Mytest {
 	private WebDriver driver;
 	DesiredCapabilities desc;
@@ -52,41 +50,13 @@ public class Mytest {
 		  WebElement acceptButton = driver.findElement(By.xpath("(//button[@type='button'])[5]"));
 		  acceptButton.click();
 		  }
-			
-				
+						
 	}
 	
   @Test
-  public void main(String[] args) throws IOException, InterruptedException {
-	  
+  public void main() throws IOException, InterruptedException {  
 
-//
-//	  
-////	  System.setProperty("webdriver.chrome.driver", "C:\\\\chromedriver_win32\\\\chromedriver.exe");
-////	  driver=new ChromeDriver();
-//	  driver.manage().window().maximize();
-//	  driver.get("https://auth.dev.vntech.io");
-//	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-// Handling Cookie
-//	  
-//	  List<WebElement> cookiePopups = driver.findElements(By.xpath("//div[@class='MuiGrid-root MuiGrid-container css-3uuuu9']"));
-//	  if (!cookiePopups.isEmpty()) {
-//	  // Cookie pop-up is present, handle it
-//	  WebElement acceptButton = driver.findElement(By.xpath("(//button[@type='button'])[5]"));
-//	  acceptButton.click();
-//	  }
-//	  
-//Signup With Email
-//		driver.findElement(By.xpath("//a[text()='Sign up']")).click();
-//		Thread.sleep(5000);
-//		driver.findElement(By.xpath("//div[@class='MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr']")).click();
-//		driver.findElement(By.xpath("(//input[@type='text'])[1]")).sendKeys("test");
-//		driver.findElement(By.xpath("(//input[@type='text'])[2]")).sendKeys("automation492");
-//		driver.findElement(By.xpath("(//input[@type='text'])[3]")).sendKeys("testautomation492@gmail.com");
-//		driver.findElement(By.xpath("(//button[@type='button'])[3]")).click();
- 
-//Sign in with Facebook
+ //Sign in with Facebook
 	
 	  driver.findElement(By.xpath("//button[@class='jss13 medium']")).click(); 
       //Handle new window
@@ -190,25 +160,14 @@ public class Mytest {
 	
 	WebElement inputField6 = driver.findElement(By.id("idSIButton9"));
 	inputField6.click();
-//	
-//	// Switch to the second new window
-//	windowHandles = driver.getWindowHandles();
-//	for (String handle : windowHandles) {
-//	    if (!handle.equals(windowStack.peek())) {
-//	        windowStack.push(handle);
-//	        driver.switchTo().window(handle);
-//	        break;
-//	    }
-//	}
+
 	driver.get("https://login.live.com/oauth20_authorize.srf?client_id=166f766d-47a4-442a-9a4e-0645cfdbf97e&scope=User.Read+openid+profile+offline_access&redirect_uri=https%3a%2f%2fauth.dev.vntech.io%2f&response_type=code&state=eyJpZCI6ImJlYjQ0ZDZhLTJiNjgtNGJmOS1iNmM0LWE0Y2M3MWMxYTJiMCIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoicG9wdXAifX0%3d&response_mode=fragment&nonce=2be52054-0c96-4f6e-ade3-9af2ac6b9cc7&code_challenge=8eiVdP3jS5twEXGcZ00iuD-inOv7h0rTUzgXvNvt-xM&code_challenge_method=S256&x-client-SKU=msal.js.browser&x-client-Ver=2.37.1&uaid=c780fb32f14b4a94ae6b772ffe93773f&msproxy=1&issuer=mso&tenant=common&ui_locales=en-US&client_info=1&epct=PAQABAAEAAAD--DLA3VO7QrddgJg7WevrLVTDHcx56ElQtrtiEkKlRKUQlxMPfGs73ozUTkhS9oVI_Tc55fHloLN8xUElit2x9LbzE9gzWSKTA-lwBiJ5KAWxW53E9ufG8cl9bw5V-WV3yFEKp4KfMNYHcA8RuyGiOOUz1HPa5dBRuZGZRfZMpLCJQ-Ih_fupggG2yi7veQjnt99mHHip0m6MH8VZjukpTgwnp3eKkvk780mjREqdvSAA&jshs=0&username=testautomation492%40gmail.com&login_hint=testautomation492%40gmail.com");
 	
 	WebElement inputField5 = driver.findElement(By.xpath("//input[@type='password']"));
 	inputField5.sendKeys("mytest@1234");
 	WebElement inputField7 = driver.findElement(By.xpath("//input[@type='submit']"));
 	inputField7.click();
-	//driver.get("https://login.live.com/ppsecure/post.srf?username=testautomation492%40gmail.com&client_id=166f766d-47a4-442a-9a4e-0645cfdbf97e&contextid=4DECA487F8AA5595&opid=82554384AB37305F&bk=1686839251&uaid=e6a419e514da491ab581bf4291b9e582&pid=15216");
-	//WebElement inputField8 = driver.findElement(By.xpath("//input[@type='submit']"));
-	//inputField8.click();
+	
 	File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
 	// Save the screenshot to a desired location
@@ -265,7 +224,7 @@ public class Mytest {
 		
 		
 		
-		driver.close();
+		driver.quit();
 		
 	  }
 	}
