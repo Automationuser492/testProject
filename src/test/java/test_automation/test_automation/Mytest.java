@@ -87,6 +87,7 @@ public class Mytest {
 	  String destinationPath2 = "C:\\Users\\palad\\Pictures\\Saved Pictures\\screenshot1.png";
 	  FileUtils.copyFile(screenshotFile2, new File(destinationPath2));
 	  driver.close();
+	  
 // Switch back to the main window
 	  driver.switchTo().window(mainWindowHandle);
 
