@@ -13,6 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,7 @@ public class Mytest {
 	private WebDriver driver;
 	DesiredCapabilities desc;
 	
+	
 	@BeforeClass
 	
 	
@@ -37,7 +39,9 @@ public class Mytest {
 		
 		desc = DesiredCapabilities.chrome();
 		
-		driver = new RemoteWebDriver(new URL("http://192.168.29.82:4444/wd/hub"), desc);
+		driver = new RemoteWebDriver(new URL(" http://172.20.10.9:4444/wd/hub"), desc);
+//		System.setProperty("webdriver.chrome.driver", "C:\\\\chromedriver_win32\\\\chromedriver.exe");
+//		  driver=new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("https://auth.dev.vntech.io");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -55,6 +59,9 @@ public class Mytest {
 	
   @Test
   public void main() throws IOException, InterruptedException {  
+	  
+
+		
 
  //Sign in with Facebook
 	
@@ -80,11 +87,13 @@ public class Mytest {
 	  inputField2.click();
 	  WebElement inputField3 = driver.findElement(By.xpath("//span[text()='OK']"));
 	  inputField3.click();
+	  Thread.sleep(5000);
+	 
 	 // Take Screenshot
 	  File screenshotFile2 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
 		// Save the screenshot to a desired location
-	  String destinationPath2 = "C:\\Users\\palad\\Pictures\\Saved Pictures\\screenshot1.png";
+	  String destinationPath2 = "C:\\Users\\palad\\Pictures\\Saved Pictures\\Facebook screenshot1.png";
 	  FileUtils.copyFile(screenshotFile2, new File(destinationPath2));
 	  driver.close();
 	  
@@ -168,11 +177,13 @@ public class Mytest {
 	inputField5.sendKeys("mytest@1234");
 	WebElement inputField7 = driver.findElement(By.xpath("//input[@type='submit']"));
 	inputField7.click();
+	Thread.sleep(5000);
+	//Take Screenshot for signin Page
 	
 	File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
 	// Save the screenshot to a desired location
-	String destinationPath = "C:\\Users\\palad\\Pictures\\Saved Pictures\\screenshot.png";
+	String destinationPath = "C:\\Users\\palad\\Pictures\\Saved Pictures\\Microsoft screenshot.png";
 	FileUtils.copyFile(screenshotFile, new File(destinationPath));
 
 	driver.close();
@@ -207,6 +218,12 @@ public class Mytest {
 	      inputField12.sendKeys("Test@1234");
 	      WebElement inputField13 = driver.findElement(By.xpath("(//span[@class='VfPpkd-vQzf8d'])[2]"));
 		  inputField13.click();
+		  //Take screenshot
+		  File screenshotFile13 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+			// Save the screenshot to a desired location
+			String destinationPath13 = "C:\\Users\\palad\\Pictures\\Saved Pictures\\googleloginscreenshot.png";
+			FileUtils.copyFile(screenshotFile13, new File(destinationPath13));
 		  
 		  driver.get("https://auth.dev.vntech.io");
 	
@@ -216,16 +233,66 @@ public class Mytest {
 	  driver.findElement(By.id("email")).sendKeys("testautomation492@yopmail.com");
 	  driver.findElement(By.id("password")).sendKeys("Test@1234");
 	  driver.findElement(By.xpath("//button[@id='signin']")).click();
+	  Thread.sleep(5000);
 	  
 	  File screenshotFile12 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
 		// Save the screenshot to a desired location
-		String destinationPath12 = "C:\\Users\\palad\\Pictures\\Saved Pictures\\screenshot3.png";
+		String destinationPath12 = "C:\\Users\\palad\\Pictures\\Saved Pictures\\othersloginscreenshot3.png";
 		FileUtils.copyFile(screenshotFile12, new File(destinationPath12));
 		
+		driver.get("https://auth.dev.vntech.io");
 		
 		
-		driver.quit();
+		//Signup With Email
+	driver.findElement(By.xpath("//a[text()='Sign up']")).click();
+  Thread.sleep(5000);
+	driver.findElement(By.xpath("//div[@class='MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr']")).click();
+	driver.findElement(By.xpath("(//input[@type='text'])[1]")).sendKeys("test");
+	driver.findElement(By.xpath("(//input[@type='text'])[2]")).sendKeys("automation493");
+	driver.findElement(By.xpath("(//input[@type='text'])[3]")).sendKeys("testautomation49211@gmail.com");
+	driver.findElement(By.xpath("(//button[@type='button'])[3]")).click();
+	boolean isPageOpen1 = false;
+	//
+	      try {
+	          WebElement element = driver.findElement(By.xpath("//div[@class='MuiBox-root css-0']"));
+	//If the element is found, it indicates that the page is open
+	          isPageOpen1 = true;
+		      } 
+	      catch (NoSuchElementException e) {
+//		    // The element is not found, indicating that the page is not open
+	      isPageOpen1 = false;
+		      }
+	 
+		  if (isPageOpen1) {
+		    System.out.println("Verification Email Sent");
+		  } else {
+		    System.out.println("Verification Email not Sent");
+		  }
+
+//		 driver.close();
+		 
+		 driver.get("https://accounts.google.com/v3/signin/identifier?dsh=S1342376775%3A1687412905811310&ifkv=Af_xneHSt1iHHcOm2M4iKiVO78hlHeH4iyJ2pvwDFJinsfEq4Oyky8RUQA1999GC7zGtqmiB0YKZyQ&service=mail&flowName=GlifWebSignIn&flowEntry=ServiceLogin");
+		 driver.findElement(By.xpath("//input[@type='email']")).sendKeys("testautomation493@gmail.com");
+		 driver.findElement(By.xpath("(//span[@class='VfPpkd-vQzf8d'])[2]")).click();
+		 Thread.sleep(6000);
+		 driver.findElement(By.xpath("//input[@type='password']")).sendKeys("Test@1234");
+		 driver.findElement(By.xpath("//span[text()='Next']")).click();
+		 Thread.sleep(6000);
+			      
+		WebElement Elem= driver.findElement(By.xpath("(//td[@class='yX xY ']//span[text()='Viralnation'])[2]"));
+		
+		((JavascriptExecutor)driver).executeScript("arguments[0].click();",Elem);
+		
+		Thread.sleep(6000);
+		
+		driver.findElement(By.xpath("//a[contains(text(),'Verify')]")).click();
+		Thread.sleep(6000);
+		System.out.println("Email Verified");
+		 
+		
+		
+      driver.quit();
 		
 	  }
 	}
